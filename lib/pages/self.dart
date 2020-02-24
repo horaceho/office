@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/global.dart';
 
 class SelfPage extends StatefulWidget{
   SelfPage({Key key}) : super(key:key);
@@ -20,6 +22,8 @@ class SelfPageState extends State<SelfPage>{
 
   @override
   Widget build(BuildContext context) {
+    final global = Provider.of<Global>(context);
+
     return Form(
       key: _formKey,
       child: Column(
@@ -42,6 +46,7 @@ class SelfPageState extends State<SelfPage>{
           RaisedButton(
             onPressed: () {
               if (_formKey.currentState.validate()) {
+                global.setName(_textEditController.text);
                 Scaffold
                   .of(context)
                   .showSnackBar(SnackBar(content: Text(_textEditController.text)));

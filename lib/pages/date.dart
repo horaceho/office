@@ -10,7 +10,7 @@ class DatePage extends StatefulWidget{
 class DatePageState extends State<DatePage>{
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       color: Colors.blue
     );
   }

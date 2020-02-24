@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/global.dart';
 
 class MarkPage extends StatefulWidget{
   MarkPage({Key key}) : super(key:key);
@@ -10,8 +12,22 @@ class MarkPage extends StatefulWidget{
 class MarkPageState extends State<MarkPage>{
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      color: Colors.green
-    );
+    final global = Provider.of<Global>(context);
+
+    return Form(
+      child: Column(
+        children: <Widget>[
+          Text(
+            global.getName,
+          ),
+          RaisedButton(
+            onPressed: () {
+              global.clearName();
+            },
+            child: Text('Clear'),
+          ),
+        ]
+      )
+     );
   }
 }

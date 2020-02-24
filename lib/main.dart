@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'models/global.dart';
 import 'models/config.dart';
 
-void main() => runApp(App());
+void main() => runApp(
+  MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => Global()),
+    ],
+    child: App(),
+  )
+);
 
 class App extends StatelessWidget {
   @override
