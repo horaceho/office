@@ -20,15 +20,13 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: HomePage(title: 'Office'),
+      home: HomePage(),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  HomePage({Key key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -37,18 +35,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int _index = 0;
+  Text _title;
 
   _onTap(int index) {
     setState(() {
       _index = index;
+      _title = Config.navigationBarItems[_index].title;
     });
+  }
+
+  @override
+  void initState() {
+    _title = Config.navigationBarItems[_index].title;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: _title,
       ),
       body: PageStorage(
         child: Config.pages[_index],
