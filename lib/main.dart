@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'models/office.dart';
+import 'models/config.dart';
 
 void main() => runApp(App());
 
@@ -27,8 +27,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final office = Office();
   int _index = 0;
+
+  _onTap(int index) {
+    setState(() {
+      _index = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +41,18 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '...',
-            ),
-          ],
-        ),
+      body: PageStorage(
+        child: Config.pages[_index],
+        bucket: Config.bucket,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _index,
-        type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.red,
-        items: office.navigationBarItems(),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: (index) => setState(() {
-          _index = index;
-        }),
+        type: Config.navigationBar.type,
+        fixedColor: Config.navigationBar.fixedColor,
+        items: Config.navigationBar.items,
+        showSelectedLabels: Config.navigationBar.showSelectedLabels,
+        showUnselectedLabels: Config.navigationBar.showUnselectedLabels,
+        onTap: _onTap,
       ),
     );
   }
